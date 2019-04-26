@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
     <title>Navigate</title>
 </head>
@@ -29,25 +31,37 @@
                 </a>
                 <a class="nav-item nav-link active" data-source="products.html" onclick="sentTheAjax(event)"
                     href="#">OUR COLLECTION</a>
-                <a class="nav-item nav-link active" data-source="about.html" onclick="sentTheAjax(event)"
-                    href="#">OUR STORY</a>
+                <a class="nav-item nav-link active" data-source="about.html" onclick="sentTheAjax(event)" href="#">OUR
+                    STORY</a>
             </div>
         </div>
     </nav>
 
-    <div id="ajax_content"></div>
+    <div id="ajax_content" ></div>
+    <div id="iconContainer" class=" mx-auto"></div>
+    
     <script>
         const myRequest = new XMLHttpRequest();
-
-       
+        const loadingIcon = document.createElement('i');
+        loadingIcon.classList.add('fas', 'fa-spinner', 'fa-spin', 'fa-6x');
+        const iconContainer = document.getElementById('iconContainer');
+        
+        const content = document.getElementById('ajax_content');
+        
         myRequest.onreadystatechange = () => {
+
             if (myRequest.readyState === 4) {
-                document.getElementById('ajax_content').innerHTML = myRequest.responseText;
+                setTimeout(function () {
+                    iconContainer.removeChild(loadingIcon);
+                    content.innerHTML = myRequest.response;
+               },2000);
             }
         };
         const sentTheAjax = (event) => {
-           const source =  event.target.getAttribute('data-source');
-           myRequest.open('GET', source);
+            content.innerHTML = "";
+            iconContainer.appendChild(loadingIcon);
+            const source = event.target.getAttribute('data-source');
+            myRequest.open('GET', source);
             myRequest.send();
         }
     </script>
