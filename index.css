@@ -39,11 +39,6 @@ body {
     text-align: center;
 }
 
-.img-container {
-    height: 40vh;
-    overflow: hidden;
-}
-
 .our-story p:first-of-type {
     font-size: 2em;
 }
@@ -138,9 +133,55 @@ body {
 .fas {
     color: #eddaebf2;
 }
-#iconContainer{
-    width:30vw;
-    height:30vh;
+
+#iconContainer {
+    width: 30vw;
+    height: 30vh;
     text-align: center;
-    margin-top: 20vh;
+    margin: 20vh auto;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.card-img-top {
+    height: 22rem;
+    object-fit: cover;
+    object-position: 0 0;
+}
+
+.all {
+    display: flex;
+    top: 80rem;
+    z-index: -1;
+
+}
+
+.img {
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+
+.img1 {
+    flex: 0.6666;
+}
+
+.img2 {
+    flex: 0.6666;
+}
+
+.img3 {
+    flex: 0.6365;
+}
+
+.img4 {
+    flex: 0.5006;
+}
+@media screen and(max-width:576px){
+    .card-img-top{
+        height: 30rem;
+    }
 }

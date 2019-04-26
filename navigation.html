@@ -37,28 +37,33 @@
         </div>
     </nav>
 
-    <div id="ajax_content" ></div>
-    <div id="iconContainer" class=" mx-auto"></div>
-    
+    <div id="ajax_content"></div>
+
+
     <script>
         const myRequest = new XMLHttpRequest();
         const loadingIcon = document.createElement('i');
         loadingIcon.classList.add('fas', 'fa-spinner', 'fa-spin', 'fa-6x');
-        const iconContainer = document.getElementById('iconContainer');
-        
+        const iconContainer = document.createElement('div');
+        iconContainer.id = 'iconContainer';
         const content = document.getElementById('ajax_content');
-        
+
         myRequest.onreadystatechange = () => {
 
             if (myRequest.readyState === 4) {
                 setTimeout(function () {
+                   document.body.removeChild(iconContainer);
                     iconContainer.removeChild(loadingIcon);
                     content.innerHTML = myRequest.response;
-               },2000);
+                }, 2000);
             }
         };
         const sentTheAjax = (event) => {
-            content.innerHTML = "";
+            scroll(top);
+            setTimeout(() => {
+                content.innerHTML = "";
+            }, 1000);
+           document.body.appendChild(iconContainer);
             iconContainer.appendChild(loadingIcon);
             const source = event.target.getAttribute('data-source');
             myRequest.open('GET', source);
